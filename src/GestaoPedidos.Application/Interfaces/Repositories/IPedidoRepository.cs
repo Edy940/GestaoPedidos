@@ -9,5 +9,5 @@ public interface IPedidoRepository
 
     Task AdicionarAsync(Pedido pedido, CancellationToken cancellationToken = default);
     Task AtualizarAsync(Pedido pedido, CancellationToken cancellationToken = default);
-    Task RemoverAsync(Pedido pedido, CancellationToken cancellationToken = default); // soft delete
+    Task RemoverAsync(Pedido pedido, CancellationToken cancellationToken = default);
 }

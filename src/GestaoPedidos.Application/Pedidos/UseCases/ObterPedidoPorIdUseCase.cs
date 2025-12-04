@@ -5,7 +5,7 @@ namespace GestaoPedidos.Application.Pedidos.UseCases;
 
 public class ObterPedidoPorIdUseCase
 {
-    private readonly IPedidoRepository _pedidoRepository;
+    public readonly IPedidoRepository _pedidoRepository;
 
     public ObterPedidoPorIdUseCase(IPedidoRepository pedidoRepository)
     {
