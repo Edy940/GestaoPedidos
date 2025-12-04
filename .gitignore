@@ -482,3 +482,30 @@ $RECYCLE.BIN/
 
 # Vim temporary swap files
 *.swp
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+.terraform.lock.hcl
+
+# Build
+bin/
+obj/
+
+# User secrets / IDE
+.vscode/
+.idea/
+*.user
+*.suo
+*.cache
+# App settings sensíveis
+src/GestaoPedidos.Api/appsettings.json
+src/GestaoPedidos.Api/appsettings.Development.json
+
+# Terraform state
+*.tfstate
+*.tfstate.backup
+.terraform/
+
