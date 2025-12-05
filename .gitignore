@@ -509,3 +509,6 @@ src/GestaoPedidos.Api/appsettings.Development.json
 *.tfstate.backup
 .terraform/
 
+src/GestaoPedidos.Api/appsettings.Development.json
+*.Development.json
+.env
