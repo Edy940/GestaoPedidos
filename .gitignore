@@ -484,31 +484,23 @@ $RECYCLE.BIN/
 *.swp
 
 # Terraform
-.terraform/
+**/.terraform/*
 *.tfstate
 *.tfstate.*
-*.tfvars
-.terraform.lock.hcl
-
-# Build
-bin/
-obj/
-
-# User secrets / IDE
-.vscode/
-.idea/
-*.user
-*.suo
-*.cache
-# App settings sensíveis
-src/GestaoPedidos.Api/appsettings.json
-src/GestaoPedidos.Api/appsettings.Development.json
-
-# Terraform state
-*.tfstate
 *.tfstate.backup
-.terraform/
+crash.log
+crash.*.log
+*.tfvars
+*.tfvars.json
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+.terraformrc
+terraform.rc
 
-src/GestaoPedidos.Api/appsettings.Development.json
-*.Development.json
-.env
+# ASP.NET Core - appsettings with credentials
+**/appsettings.json
+**/appsettings.Development.json
+**/appsettings.Production.json
+!**/appsettings.example.json

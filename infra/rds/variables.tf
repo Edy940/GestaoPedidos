@@ -27,3 +27,8 @@ variable "db_instance_class" {
   type        = string
   default     = "db.t3.micro"
 }
+variable "product_images_bucket_name" {
+  description = "Nome do bucket S3 para armazenar fotos dos produtos"
+  type        = string
+}
+

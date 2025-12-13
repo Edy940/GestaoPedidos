@@ -1,4 +1,11 @@
-﻿using GestaoPedidos.Application.Clientes.UseCases;
+﻿using Amazon;
+using Amazon.S3;
+using Microsoft.Extensions.Configuration;
+using Amazon.S3;
+using Amazon.Extensions.NETCore.Setup;
+using GestaoPedidos.Application.Interfaces.Storage;
+using GestaoPedidos.Infrastructure.Storage;
+using GestaoPedidos.Application.Clientes.UseCases;
 using GestaoPedidos.Application.Produtos.UseCases;
 using GestaoPedidos.Application.Pedidos.UseCases;
 using GestaoPedidos.Application.Interfaces.Repositories;
@@ -9,6 +16,21 @@ using Microsoft.EntityFrameworkCore;
 
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 var builder = WebApplication.CreateBuilder(args);
+
+// AWS SDK
+builder.Services.AddDefaultAWSOptions(builder.Configuration.GetAWSOptions());
+builder.Services.AddAWSService<IAmazonS3>();
+
+builder.Services.AddSingleton<IAmazonS3>(sp =>
+{
+    var config = sp.GetRequiredService<IConfiguration>();
+    var regionName = config["AWS:Region"] ?? "us-east-1";
+    var region = RegionEndpoint.GetBySystemName(regionName);
+
+    return new AmazonS3Client(region);
+});
+
+builder.Services.AddScoped<IProductImageStorageService, S3ProductImageStorageService>();
 
 // 🔹 DbContext
 builder.Services.AddDbContext<GestaoPedidosDbContext>(options =>
