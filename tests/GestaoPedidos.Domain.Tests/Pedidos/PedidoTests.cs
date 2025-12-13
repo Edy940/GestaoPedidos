@@ -11,7 +11,12 @@ public class PedidoTests
     {
         var pedido = new Pedido(Guid.NewGuid());
 
-        var item = new ItemPedido(Guid.NewGuid(), "Pastel", 10m, 2);
+        var item = new ItemPedido(
+            Guid.NewGuid(),
+            "Pastel",
+            10m,
+            2);
+
         pedido.AdicionarItem(item);
 
         pedido.ValorTotal.Should().Be(20m);
