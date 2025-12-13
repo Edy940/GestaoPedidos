@@ -17,16 +17,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0AB3BF05
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GestaoPedidos.Domain.Tests", "tests\GestaoPedidos.Domain.Tests\GestaoPedidos.Domain.Tests.csproj", "{33257FDE-D144-475A-BF63-D8506D07F524}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Clientes", "Clientes", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
-	ProjectSection(SolutionItems) = preProject
-		ClienteTests.cs = ClienteTests.cs
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Pedidos", "Pedidos", "{41A622EF-36F3-4BFA-84BB-F4F9BCCDE2DC}"
-	ProjectSection(SolutionItems) = preProject
-		PedidoTests.cs = PedidoTests.cs
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -107,8 +97,6 @@ Global
 		{183E9FE4-6D8A-4DC7-83AD-0B6C24925D20} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{F376E231-E37B-44F2-8477-A870C6AB70C4} = {827E0CD3-B72D-47B6-A68D-7590B98EB39B}
 		{33257FDE-D144-475A-BF63-D8506D07F524} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
-		{02EA681E-C7D8-13C7-8484-4AC65E1B71E8} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
-		{41A622EF-36F3-4BFA-84BB-F4F9BCCDE2DC} = {0AB3BF05-4346-4AA6-1389-037BE0695223}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9C71BABB-90B3-4256-8936-F010E2B153B7}

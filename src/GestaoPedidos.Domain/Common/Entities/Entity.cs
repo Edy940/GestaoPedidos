@@ -3,8 +3,11 @@
 public abstract class Entidade
 {
     public Guid Id { get; protected set; } = Guid.NewGuid();
+
     public DateTime DataCriacao { get; protected set; } = DateTime.UtcNow;
+
     public DateTime? DataAtualizacao { get; protected set; }
+
     public bool Excluido { get; protected set; }
 
     protected void Tocar()
@@ -14,7 +17,9 @@ public abstract class Entidade
 
     public void MarcarComoExcluido()
     {
-        if (Excluido) return;
+        if (Excluido)
+            return;
+
         Excluido = true;
         Tocar();
     }

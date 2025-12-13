@@ -14,6 +14,13 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v4
 
+      - name: Scan de segredos com GitGuardian (não falha o pipeline)
+        uses: GitGuardian/ggshield-action@v1
+        env:
+          GITGUARDIAN_API_KEY: ${{ secrets.GITGUARDIAN_API_KEY }}
+        with:
+          args: secret scan repo . --exit-zero
+
       - name: Configurar credenciais da AWS
         uses: aws-actions/configure-aws-credentials@v4
         with:

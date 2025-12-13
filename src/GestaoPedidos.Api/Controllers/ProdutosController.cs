@@ -1,4 +1,6 @@
-﻿using GestaoPedidos.Application.Produtos.UseCases;
+﻿using GestaoPedidos.Api.Contracts.Produtos;
+using GestaoPedidos.Application.Interfaces.Storage;
+using GestaoPedidos.Application.Produtos.UseCases;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestaoPedidos.Api.Controllers;
@@ -12,31 +14,61 @@ public class ProdutosController : ControllerBase
     private readonly ListarProdutosUseCase _listarProdutos;
     private readonly ObterProdutoPorIdUseCase _obterProdutoPorId;
     private readonly RemoverProdutoUseCase _removerProduto;
+    private readonly IProductImageStorageService _imageStorage;
+
 
     public ProdutosController(
         CriarProdutoUseCase criarProduto,
         AtualizarProdutoUseCase atualizarProduto,
         ListarProdutosUseCase listarProdutos,
         ObterProdutoPorIdUseCase obterProdutoPorId,
-        RemoverProdutoUseCase removerProduto)
+        RemoverProdutoUseCase removerProduto,
+        IProductImageStorageService imageStorage)
     {
         _criarProduto = criarProduto;
         _atualizarProduto = atualizarProduto;
         _listarProdutos = listarProdutos;
         _obterProdutoPorId = obterProdutoPorId;
         _removerProduto = removerProduto;
+        _imageStorage = imageStorage;
     }
 
     // POST api/produtos
     [HttpPost]
-    public async Task<IActionResult> Criar([FromBody] CriarProdutoRequest request, CancellationToken cancellationToken)
+    [Consumes("multipart/form-data")]
+    public async Task<IActionResult> Criar([FromForm] CriarProdutoForm form, CancellationToken cancellationToken)
     {
-        if (!ModelState.IsValid)
-            return BadRequest(ModelState);
+        if (form is null)
+            return BadRequest("Form inválido.");
+
+        if (form.Foto is null || form.Foto.Length == 0)
+            return BadRequest("A foto é obrigatória.");
+
+        if (_imageStorage is null)
+            return StatusCode(500, "IProductImageStorageService não foi resolvido no DI.");
+
+        var contentType = string.IsNullOrWhiteSpace(form.Foto.ContentType)
+            ? "application/octet-stream"
+            : form.Foto.ContentType;
+
+        var fotoKey = await _imageStorage.UploadAsync(
+            form.Foto.OpenReadStream(),
+            form.Foto.FileName,
+            contentType,
+            cancellationToken);
+
+        var request = new CriarProdutoRequest
+        {
+            Nome = form.Nome,
+            Preco = form.Preco,
+            TipoProduto = form.TipoProduto,
+            FotoKey = fotoKey
+        };
 
         var produto = await _criarProduto.ExecutarAsync(request, cancellationToken);
         return CreatedAtAction(nameof(ObterPorId), new { id = produto.Id }, produto);
     }
+
 
     // GET api/produtos
     [HttpGet]
