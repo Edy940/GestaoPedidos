@@ -1,7 +1,11 @@
 name: Infra - Terraform Apply RDS (manual)
 
 on:
+<<<<<<< HEAD
   workflow_dispatch:
+=======
+  workflow_dispatch:  # só roda quando você clicar no botão no GitHub
+>>>>>>> ab8afd5e2e1dbe05c3ba464e9737ddc243a88c5f
 
 jobs:
   terraform-apply:
