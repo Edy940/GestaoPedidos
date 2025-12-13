@@ -487,6 +487,7 @@ $RECYCLE.BIN/
 **/.terraform/*
 *.tfstate
 *.tfstate.*
+*.tfstate.backup
 crash.log
 crash.*.log
 *.tfvars
@@ -497,3 +498,9 @@ override.tf.json
 *_override.tf.json
 .terraformrc
 terraform.rc
+
+# ASP.NET Core - appsettings with credentials
+**/appsettings.json
+**/appsettings.Development.json
+**/appsettings.Production.json
+!**/appsettings.example.json
